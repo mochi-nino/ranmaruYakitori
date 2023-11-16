@@ -32,7 +32,7 @@ export default defineNuxtConfig({
   buildModules: ["@nuxtjs/fontawesome"],
 
   app: {
-    baseURL: process.env.NODE_ENV === 'production' ? '/ranmaru/' : '/',
+    baseURL: process.env.NODE_ENV === 'production' ? '/ranmaruYakitori/' : '/',
     buildAssetsDir: '/static/'
   }
 });
