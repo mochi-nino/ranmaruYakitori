@@ -4,7 +4,7 @@
       <transition v-for="(img, idx) in slideImg" :key="img.index">
         <div class="px-2 absolute w-full h-full" v-show="showImg === idx">
           <img
-            :src="img.img"
+            :src="getImageUrl(img.img)"
             :alt="'Image ' + img.index"
             class="w-full h-full object-cover object-center"
           />
@@ -40,11 +40,21 @@ components: {
   about;
 }
 
+const getImageUrl = (name) => {
+  const assets = import.meta.glob("~/assets/images/*", {
+    eager: true,
+    import: "default",
+  });
+  console.log(assets);
+  console.log(name);
+  return assets[`/assets/images/${name}`];
+};
+
 // 輪播圖陣列
 const slideImg = reactive([
-  { index: 1, img: "/static/assets/images/01.jpg" },
-  { index: 2, img: "/static/assets/images/02.jpg" },
-  { index: 3, img: "/static/assets/images/03.jpg" },
+  { index: 1, img: "01.jpg" },
+  { index: 2, img: "02.jpg" },
+  { index: 3, img: "03.jpg" },
 ]);
 
 // 輪播圖Idx
