@@ -19,6 +19,10 @@ components: {
   silder;
 }
 
+// definePageMeta({
+//   middleware: "id-not-found",
+// });
+
 const option = ref("");
 
 const screenOptin = (value) => {

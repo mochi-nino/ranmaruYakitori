@@ -85,15 +85,11 @@
           :params="{ id: randomParams }"
           v-if="isCartIn"
         >
-          <btn class="mr-5">前往結帳</btn>
+          <btn class="mr-5" @click="upCartTotalPrice">前往結帳</btn>
         </nuxt-link>
       </div>
     </div>
 
-    <!-- 總計 -->
-    <!-- <div class="w-[80%] mx-auto">
-      <h2 class="text-2xl text-center bg-yellow-900/75 py-2">總計</h2>
-    </div> -->
   </section>
 </template>
 
@@ -159,9 +155,14 @@ const randomParams = computed(() => {
     // charAt() 回傳指定的值
     result += characters.charAt(randomIndex);
   }
-  console.log(result);
   return result;
 });
+
+//* 把小計放進store
+const upCartTotalPrice = () => {
+  const price = subTotal;
+  store.getCartTotalPrice(price);
+};
 
 onMounted(() => {});
 </script>

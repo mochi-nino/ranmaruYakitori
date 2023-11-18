@@ -45,8 +45,7 @@ const getImageUrl = (name) => {
     eager: true,
     import: "default",
   });
-  console.log(assets);
-  console.log(name);
+
   return assets[`/assets/images/${name}`];
 };
 

@@ -1,8 +1,11 @@
 <template>
   <section
-    class="xl:container xl:h-[calc(100vh-65px-106px)] m-auto py-10 xl:px-36 grid xl:grid-cols-2 items-center md:grid-cols-1 px-5"
+    class="xl:container xl:h-[calc(100vh-65px-106px)] m-auto py-10 xl:px-36 grid xl:grid-cols-2 items-center md:grid-cols-1 px-5 relative"
     v-if="product.id"
   >
+    <nuxt-link to="/products/" class="xl:absolute xl:top-10 xl:left-36 mb-10">
+      <btn>返回商品頁</btn>
+    </nuxt-link>
     <!-- 圖片區 -->
     <div class="xl:w-[500px]">
       <!-- 大圖 -->
@@ -54,6 +57,18 @@
       </div>
     </div>
   </section>
+
+  <section
+    v-if="notProduct"
+    class="xl:container xl:h-[calc(100vh-65px-106px)] m-auto py-10 xl:px-36 px-5 text-center flex items-center justify-center"
+  >
+    <div class="w-[80%] h-[80%]">
+      <p class="text-white text-2xl mb-10">未找到商品</p>
+      <nuxt-link to="/products/">
+        <btn>返回商品頁</btn>
+      </nuxt-link>
+    </div>
+  </section>
 </template>
 
 <script setup>
@@ -63,11 +78,13 @@ import { userStore } from "@/store/index";
 components: {
   btn;
 }
+
 const route = useRoute();
 const store = userStore();
 const product = reactive({});
 const showMainImg = ref();
 const count = ref(1);
+const notProduct = ref(false);
 
 //* 點小圖換大圖
 const changMainImg = (idx) => {
@@ -123,11 +140,16 @@ onBeforeMount(() => {
     .then((res) => res.json())
     .then((result) => {
       const data = result.find((item) => item.id == route.params.id);
-      Object.assign(product, data);
-      showMainImg.value = product.images[0];
+      if (data) {
+        Object.assign(product, data);
+        showMainImg.value = product.images[0];
+      } else {
+        notProduct.value = true;
+      }
     })
     .catch((error) => {
       console.log(error);
     });
+  // console.log(route.params.id);
 });
 </script>

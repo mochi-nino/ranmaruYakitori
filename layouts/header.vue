@@ -35,13 +35,13 @@
           <li v-if="isLoggedIn">
             <p class="text-white cursor-pointer" @click="logOut">登出</p>
           </li>
-          <li @click="openFavourites = !openFavourites" class="relative">
+          <li @click="openFavouriteBox" class="relative">
             <i class="fa-solid fa-heart" style="color: #ff000a"></i>
 
             <!-- 收藏清單 -->
             <div
               class="bg-white w-[350px] h-[350px] overflow-auto absolute z-10 -right-20 top-12 px-2 border-4 border-yellow-800"
-              v-if="openFavourites"
+              v-if="isFavoriteOpen"
               @click.stop
             >
               <ul>
@@ -49,7 +49,7 @@
                   <nuxt-link
                     :to="`/products/${item.id}`"
                     :params="{ id: item.id }"
-                    @click="openFavourites = !openFavourites"
+                    @click="openFavouriteBox"
                   >
                     <div
                       class="flex justify-between items-center gap-2 text-sm my-2 border-y-2"
@@ -125,6 +125,15 @@ const isLoggedIn = computed(() => {
 const isFavorite = computed(() => {
   return store.favourite.length <= 0 ? "目前沒有任何收藏" : null;
 });
+
+//* 收藏彈窗
+const isFavoriteOpen = computed(() => {
+  return !!store.openFavouriteBox;
+});
+
+const openFavouriteBox = () => {
+  store.openFavouriteBox = !store.openFavouriteBox;
+};
 
 //* 判斷購物車有無資料
 const showCartCount = computed(() => {

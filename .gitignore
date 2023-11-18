@@ -25,4 +25,6 @@ logs
 !.env.example
 !.output/
 
-# git subtree push --prefix dist origin gh-pages2
+
+# npm run generate
+# git subtree push --prefix .output/public origin gh-pages2

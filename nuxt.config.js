@@ -10,7 +10,6 @@ export default defineNuxtConfig({
     },
   },
 
-
   css: ["~/assets/scss/main.scss"],
 
   modules: ["@nuxtjs/tailwindcss", "@vee-validate/nuxt", "@pinia/nuxt"],
@@ -32,7 +31,7 @@ export default defineNuxtConfig({
   buildModules: ["@nuxtjs/fontawesome"],
 
   app: {
-    baseURL: process.env.NODE_ENV === 'production' ? '/ranmaruYakitori/' : '/',
-    buildAssetsDir: '/static/'
-  }
+    baseURL: process.env.NODE_ENV === "production" ? "/ranmaruYakitori/" : "/",
+    buildAssetsDir: "/static/",
+  },
 });

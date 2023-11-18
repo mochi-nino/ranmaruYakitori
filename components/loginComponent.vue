@@ -65,11 +65,12 @@
 //! ----------宣告引入------------
 //? store用
 import { userStore } from "@/store/index";
-const router = useRouter();
+const store = userStore();
 
 //? 路由器
 import { useRouter } from "vue-router";
-const store = userStore();
+const router = useRouter();
+
 
 import btn from "@/components/button.vue";
 import { ref } from "vue";

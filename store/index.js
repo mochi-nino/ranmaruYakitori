@@ -10,8 +10,12 @@ export const userStore = defineStore("main", () => {
   const loading = ref(false);
 
   const favourite = reactive([]);
+  const openFavouriteBox = ref(false);
 
   const cart = reactive([]);
+  const cartTotalPrice = ref();
+
+  const buyerInfo = ref("");
 
   //? getters(計算)computed
 
@@ -89,6 +93,16 @@ export const userStore = defineStore("main", () => {
     localStorage.setItem("cart", JSON.stringify(cart));
   };
 
+  const getCartTotalPrice = (price) => {
+    console.log(price);
+    cartTotalPrice.value = price;
+  };
+
+  //* 付款完成資料
+  const getBuyerInfo = (data) => {
+    buyerInfo.value = data;
+  };
+
   return {
     data,
     loading,
@@ -105,5 +119,10 @@ export const userStore = defineStore("main", () => {
     removeFromCart,
     editCartCount,
     getCart,
+    getBuyerInfo,
+    buyerInfo,
+    getCartTotalPrice,
+    cartTotalPrice,
+    openFavouriteBox,
   };
 });
