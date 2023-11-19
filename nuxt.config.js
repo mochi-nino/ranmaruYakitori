@@ -3,6 +3,18 @@
 export default defineNuxtConfig({
   devtools: { enabled: false },
 
+  app: {
+    head: {
+      title: "蘭丸燒烤 | RANMARU",
+      meta: [{ name: "user", content: "會員中心" }],
+      link: {
+        rel: "icon",
+        type: "image/x-icon",
+        href: "logo.ico",
+      },
+    },
+  },
+
   postcss: {
     plugins: {
       tailwindcss: {},

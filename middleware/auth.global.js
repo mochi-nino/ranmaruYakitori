@@ -6,6 +6,8 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
   //? 如果切換頁面收藏彈窗是開的則把關掉
   if (store.openFavouriteBox) {
     store.openFavouriteBox = false;
+  } else if (store.openHB) {
+    store.openHB = false;
   }
 
   if (to.path === "/user" && process.client) {

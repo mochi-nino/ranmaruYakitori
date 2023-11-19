@@ -1,14 +1,14 @@
 <template>
   <section class="xl:w-[1280px] m-auto py-10">
     <!-- 購物車 -->
-    <div class="w-[80%] mx-auto">
+    <div class="w-[90%] mx-auto">
       <h2 class="text-3xl text-center bg-yellow-900/75 py-3">購物車</h2>
       <ul class="bg-white">
         <!-- 標題 -->
         <li
           class="grid grid-cols-6 justify-between items-center py-5 px-2 text-center font-bold text-lg"
         >
-          <div class="w-[150px]"></div>
+          <div class="mr-2 xl:w-[150px]"></div>
           <p>名稱</p>
           <p>單價</p>
           <p>數量</p>
@@ -23,7 +23,7 @@
           class="grid grid-cols-6 justify-between items-center p-2"
         >
           <!-- 圖片 -->
-          <div class="w-[150px] h-[150px]">
+          <div class="mr-2 xl:w-[150px] xl:h-[150px]">
             <img
               :src="item.images[0]"
               :alt="item.title"
@@ -36,15 +36,15 @@
             <p>${{ item.price }}</p>
           </div>
           <!-- 數量 -->
-          <div class="flex justify-center items-center gap-5">
+          <div class="flex justify-center items-center gap-1 xl:gap-5">
             <btn
-              class="w-[35px] text-2xl"
+              class="w-[30px] h-[20px] xl:text-2xl xl:w-[35px]"
               @click="editCount(0, item, item.count)"
               >－</btn
             >
             <p>{{ item.count }}</p>
             <btn
-              class="w-[35px] text-2xl"
+              class="w-[30px] h-[20px] xl:text-2xl xl:w-[35px]"
               @click="editCount(1, item, item.count)"
               >＋</btn
             >
@@ -54,7 +54,7 @@
             <p>${{ item.price * item.count }}</p>
           </div>
           <!-- 刪除 -->
-          <div class="text-center px-10">
+          <div class="text-center xl:px-10">
             <i
               class="fa-solid fa-trash"
               style="color: #000000"
@@ -89,7 +89,6 @@
         </nuxt-link>
       </div>
     </div>
-
   </section>
 </template>
 

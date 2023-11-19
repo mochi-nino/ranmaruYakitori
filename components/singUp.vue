@@ -1,6 +1,6 @@
 <template>
-  <section class="h-[calc(100vh-65px-106px)] flex items-center">
-    <div class="xl:w-1/3 md:container m-auto">
+  <section class="xl:h-[calc(100vh-65px-106px)] flex items-center p-5">
+    <div class="xl:w-1/3 md:container m-auto w-full">
       <h1 class="text-4xl text-center bg-yellow-900/75 py-3">會員註冊</h1>
       <!-- 輸入區塊 -->
       <VeeForm @submit="submit">
@@ -9,7 +9,7 @@
         >
           <!-- 設定E-mail -->
           <li>
-            <label for="" class="w-[80px] inline-block text-right"
+            <label for="" class="w-[80px] inline-block xl:text-right"
               >信箱：</label
             >
             <VeeField
@@ -20,12 +20,12 @@
               rules="required|email"
               class="w-[350px] h-[45px] px-2 py-4 text-black border border-gray-400/50"
             />
-            <VeeErrorMessage name="email" class="text-red-500 block mx-20" />
+            <VeeErrorMessage name="email" class="text-red-500 block xl:mx-20" />
           </li>
 
           <!-- 設定密碼 -->
           <li>
-            <label for="" class="w-[80px] inline-block text-right"
+            <label for="" class="w-[80px] inline-block xl:text-right"
               >密碼：</label
             >
             <VeeField
@@ -41,12 +41,15 @@
               }"
               class="w-[350px] h-[45px] px-2 py-4 text-black border border-gray-400/50"
             />
-            <VeeErrorMessage name="password" class="text-red-500 block mx-20" />
+            <VeeErrorMessage
+              name="password"
+              class="text-red-500 block xl:mx-20"
+            />
           </li>
 
           <!-- 確認密碼 -->
           <li>
-            <label for="" class="w-[80px] inline-block text-right"
+            <label for="" class="w-[80px] inline-block xl:text-right"
               >確認密碼：</label
             >
             <VeeField
@@ -59,13 +62,13 @@
             />
             <VeeErrorMessage
               name="confirmation"
-              class="text-red-500 block mx-20"
+              class="text-red-500 block xl:mx-20"
             />
           </li>
 
           <!-- 姓名 -->
           <li>
-            <label for="" class="w-[80px] inline-block text-right"
+            <label for="" class="w-[80px] inline-block xl:text-right"
               >姓名：</label
             >
             <VeeField
@@ -76,7 +79,7 @@
               rules="required"
               class="w-[350px] h-[45px] px-2 py-4 text-black border border-gray-400/50"
             />
-            <VeeErrorMessage name="name" class="text-red-500 block mx-20" />
+            <VeeErrorMessage name="name" class="text-red-500 block xl:mx-20" />
           </li>
           <!-- 按鈕 -->
           <li class="text-center">

@@ -1,11 +1,16 @@
 <template>
-  <header class="bg-yellow-900/75">
-    <section class="flex justify-between xl:container mx-auto text-white px-10">
+  <header class="bg-yellow-900/75 relative">
+    <section class="flex justify-between xl:container mx-auto text-white">
       <!-- logo -->
       <div class="logo py-2">
         <nuxt-link to="/" class="text-4xl font-black flex gap-4 items-center">
-          <img src="@/public/logo.png" alt="logo" class="w-28" />
-          <div class="font-mono text-center tracking-wider">
+          <img
+            src="@/public/logo.png"
+            alt="logo"
+            class="w-28 z-[90]"
+            :class="openHBFixed('logo')"
+          />
+          <div class="font-mono text-center tracking-wider hidden xl:block">
             <h1>蘭丸串燒</h1>
             <p class="my-1 title-p text-white">焼き鳥</p>
           </div>
@@ -13,17 +18,15 @@
       </div>
 
       <!-- Nav -->
-      <nav class="flex items-center">
-        <ul
-          class="flex items-center gap-12 justify-between text-xl font-medium"
-        >
-          <li>
+      <nav class="items-center xl:flex">
+        <ul class="flex text-xl font-medium xl:gap-12 xl:justify-between">
+          <li class="hidden xl:block">
             <nuxt-link to="/products/">商店</nuxt-link>
           </li>
-          <li v-if="!isLoggedIn">
+          <li class="hidden xl:block" v-if="!isLoggedIn">
             <nuxt-link to="/login">登入</nuxt-link>
           </li>
-          <li v-if="isLoggedIn">
+          <li class="hidden xl:block" v-if="isLoggedIn">
             <nuxt-link to="/user">
               <img
                 :src="userData.avatar"
@@ -32,15 +35,18 @@
               />
             </nuxt-link>
           </li>
-          <li v-if="isLoggedIn">
+          <li class="hidden xl:block" v-if="isLoggedIn">
             <p class="text-white cursor-pointer" @click="logOut">登出</p>
           </li>
-          <li @click="openFavouriteBox" class="relative">
+          <li
+            @click="openFavouriteBox"
+            class="relative leading-[105px] ml-48 xl:leading-normal xl:ml-0"
+          >
             <i class="fa-solid fa-heart" style="color: #ff000a"></i>
 
             <!-- 收藏清單 -->
             <div
-              class="bg-white w-[350px] h-[350px] overflow-auto absolute z-10 -right-20 top-12 px-2 border-4 border-yellow-800"
+              class="bg-white w-[350px] h-[350px] overflow-auto absolute z-10 -right-16 px-2 border-4 border-yellow-800 xl:-right-20 xl:top-12"
               v-if="isFavoriteOpen"
               @click.stop
             >
@@ -77,12 +83,73 @@
               <div class="text-center text-red-500 mt-10">{{ isFavorite }}</div>
             </div>
           </li>
-          <li class="relative">
+          <li class="relative hidden xl:block">
             <nuxt-link to="/cart">
               <i class="fa-solid fa-cart-shopping" style="color: #ffffff"></i>
             </nuxt-link>
             <div
               class="w-[18px] h-[18px] bg-red-500 rounded-[50px] absolute -top-2 -right-3 flex justify-center items-center text-[14px]"
+              v-if="showCartCount"
+            >
+              {{ store.cart.length }}
+            </div>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- 漢堡 -->
+      <div
+        class="flex justify-center items-center flex-col gap-2 xl:hidden px-5 z-[99]"
+        :class="openHBFixed('hb')"
+        @click="store.openHB = !store.openHB"
+      >
+        <span
+          class="w-[35px] h-[5px] bg-white transition-all"
+          :class="changHB(1)"
+        ></span>
+        <span
+          class="w-[35px] h-[5px] bg-white transition-all"
+          :class="changHB(2)"
+        ></span>
+        <span
+          class="w-[35px] h-[5px] bg-white transition-all"
+          :class="changHB(3)"
+        ></span>
+      </div>
+
+      <!-- 漢堡內頁 -->
+
+      <nav
+        class="flex items-center fixed w-full z-[50] xl:hidden"
+        v-if="store.openHB"
+      >
+        <ul
+          class="flex flex-col justify-evenly text-center text-2xl font-medium bg-yellow-900 w-full h-[100vh]"
+        >
+          <li class="border-b-2 p-5">
+            <nuxt-link to="/products/">商店</nuxt-link>
+          </li>
+          <li class="border-b-2 p-5" v-if="!isLoggedIn">
+            <nuxt-link to="/login">登入</nuxt-link>
+          </li>
+          <li class="border-b-2 p-5" v-if="isLoggedIn">
+            <nuxt-link to="/user">
+              <img
+                :src="userData.avatar"
+                :alt="userData.name"
+                class="w-[50px] h-[50px] rounded-[50px] object-cover object-center"
+              />
+            </nuxt-link>
+          </li>
+          <li class="border-b-2 p-5" v-if="isLoggedIn">
+            <p class="text-white cursor-pointer" @click="logOut">登出</p>
+          </li>
+          <li class="border-b-2 p-5 relative flex items-center justify-center">
+            <nuxt-link to="/cart">
+              <p class="text-white">購物車</p>
+            </nuxt-link>
+            <div
+              class="w-[18px] h-[18px] bg-red-500 rounded-[50px] flex justify-center items-center text-[14px] ml-2"
               v-if="showCartCount"
             >
               {{ store.cart.length }}
@@ -107,6 +174,7 @@ const router = useRouter();
 //? Vue3
 import { onMounted, computed, ref } from "vue";
 const openFavourites = ref(false);
+const hb = ref(true);
 
 //! ----------功能------------
 //* 登出
@@ -164,6 +232,28 @@ const removeFavourite = (item) => {
   store.removeFromFavourite(item);
 };
 
+//* logo跟hb固定fixed
+const openHBFixed = computed(() => (type) => {
+  if (store.openHB) {
+    if (type === "logo") {
+      return "fixed top-2";
+    } else {
+      return "fixed top-10 right-0";
+    }
+  }
+});
+
+//* hb動畫
+const changHB = computed(() => (idx) => {
+  if (idx === 1 && store.openHB) {
+    return "-rotate-[135deg] translate-y-1";
+  } else if (idx === 2 && store.openHB) {
+    return "hidden";
+  } else if (idx === 3 && store.openHB) {
+    return "rotate-[135deg] -translate-y-2";
+  }
+});
+
 //* 抓資料
 const getUserDataFromStorage = () => {
   const userLocalStorage = localStorage.getItem("userData");
@@ -197,6 +287,7 @@ onMounted(() => {
   getFavouriteFromStorage();
   getCartData();
   emitLoading("loading", false);
+  console.log(router);
 });
 </script>
 

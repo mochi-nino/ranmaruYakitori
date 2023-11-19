@@ -148,7 +148,7 @@
               :id="table.name"
               :label="table.title"
               :rules="table.rules"
-              class="w-[350px] h-[45px] px-2 py-4 text-black border border-gray-400/50"
+              class="w-[300px] h-[45px] px-2 py-4 text-black border border-gray-400/50 xl:w-[350px]"
             >
             </VeeField>
             <VeeErrorMessage
@@ -159,7 +159,7 @@
         </ul>
 
         <div class="bg-yellow-900/75 py-5 text-lg mt-5">
-          <ol class="xl:w-[150px] ml-auto">
+          <ol class="w-[150px] ml-auto">
             <li class="flex items-center gap-2 m">
               <p class="text-white">小計：</p>
               <p class="text-white">${{ store.cartTotalPrice }}</p>

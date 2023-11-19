@@ -1,6 +1,6 @@
 <template>
   <section class="h-[calc(100vh-65px-106px)] flex items-center">
-    <div class="xl:w-1/3 md:container m-auto">
+    <div class="xl:w-1/3 md:container m-auto w-full px-5">
       <h1 class="text-4xl text-center bg-yellow-900/75 py-3">會員登入</h1>
       <!-- 輸入區塊 -->
       <VeeForm @submit="submit" :validation-schema="schema">
@@ -71,7 +71,6 @@ const store = userStore();
 import { useRouter } from "vue-router";
 const router = useRouter();
 
-
 import btn from "@/components/button.vue";
 import { ref } from "vue";
 
@@ -103,7 +102,6 @@ const submit = (value) => {
       return res.json();
     })
     .then((result) => {
-
       //? 驗證是否與輸入的值相同
       const userDataResearch = result.filter(
         (item) => value.email === item.email && value.password === item.password

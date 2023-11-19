@@ -2,7 +2,7 @@
   <section class="flex overflow-hidden h-[500px] relative">
     <TransitionGroup :name="transitionName">
       <transition v-for="(img, idx) in slideImg" :key="img.index">
-        <div class="px-2 absolute w-full h-full" v-show="showImg === idx">
+        <div class="absolute w-full h-full" v-show="showImg === idx">
           <img
             :src="getImageUrl(img.img)"
             :alt="'Image ' + img.index"
@@ -24,7 +24,7 @@
     >
 
     <span
-      class="text-4xl h-96 absolute [writing-mode:vertical-rl] font-bold tracking-wider inset-y-0 m-auto right-96 bg-gray-700/50"
+      class="text-4xl h-96 absolute [writing-mode:vertical-rl] font-bold tracking-wider inset-y-0 m-auto bg-gray-700/50 right-10 xl:right-96"
       >喝酒、聊天，新選擇。<br />蘭丸串燒。</span
     >
   </section>

@@ -3,23 +3,25 @@
     <div
       v-for="(data, idx) in dataList"
       :key="data.length"
-      class="h-[400px] my-32 bg-yellow-800/75 box"
+      class="my-16 bg-yellow-800/75 box xl:my-32 xl:h-[400px]"
     >
       <div
-        class="flex justify-center items-center mx-auto h-full xl:container gap-72 box-inner"
+        class="flex flex-col justify-center items-center mx-auto h-full xl:container xl:gap-72 box-inner xl:flex-row"
       >
-        <div class="w-[480px] -mr-32">
+        <div class="xl:w-[480px] xl:-mr-32">
           <img
             :src="getImageUrl(data.img)"
             :alt="data.title"
-            class="w-full h-[450px] object-cover rounded"
+            class="w-full object-cover rounded xl:h-[450px]"
           />
         </div>
-        <div class="flex gap-16 h-full mx-10">
-          <p class="[writing-mode:vertical-rl] py-5 text-lg tracking-wider">
+        <div
+          class="flex flex-col-reverse p-5 xl:p-0 xl:flex-row xl:gap-16 xl:h-full xl:mx-10"
+        >
+          <p class="xl:[writing-mode:vertical-rl] py-5 text-lg tracking-wider">
             {{ data.txt }}
           </p>
-          <h3 class="text-4xl [writing-mode:vertical-rl] font-bold -mt-8">
+          <h3 class="text-4xl xl:[writing-mode:vertical-rl] font-bold xl:-mt-8">
             {{ data.title }}
           </h3>
         </div>
@@ -60,15 +62,18 @@ const dataList = reactive([
 </script>
 
 <style lang="scss" scoped>
-section {
-  .box {
-    &:nth-child(2) {
-      div {
-        flex-direction: row-reverse;
+@media screen and (min-width: 1280px) {
+  section {
+    .box {
+      &:nth-child(2) {
+        div {
+          flex-direction: row-reverse;
+        }
       }
     }
   }
 }
+
 p {
   color: white;
 }

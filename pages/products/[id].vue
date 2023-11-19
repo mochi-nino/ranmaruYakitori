@@ -42,14 +42,14 @@
         </btn>
       </div>
       <!-- 購物車 -->
-      <div class="flex items-center gap-5 text-center">
+      <div class="flex items-center gap-5 text-center -mt-20 xl:-mt-0">
         <btn class="w-[35px] text-2xl" @click="editCount(0)">－</btn>
         <span>{{ count }}</span>
         <btn class="w-[35px] text-2xl" @click="editCount(1)">＋</btn>
         <btn class="ml-5" @click="addToCart(product)">加入購物車</btn>
       </div>
       <!-- 描述 -->
-      <div>
+      <div class="-mt-20 xl:-mt-0">
         <h3 class="text-2xl bg-yellow-900 text-center mb-5">商品描述</h3>
         <div>
           <p class="text-white">{{ product.description }}</p>

@@ -11,6 +11,7 @@ export const userStore = defineStore("main", () => {
 
   const favourite = reactive([]);
   const openFavouriteBox = ref(false);
+  const openHB = ref(false);
 
   const cart = reactive([]);
   const cartTotalPrice = ref();
@@ -124,5 +125,6 @@ export const userStore = defineStore("main", () => {
     getCartTotalPrice,
     cartTotalPrice,
     openFavouriteBox,
+    openHB,
   };
 });

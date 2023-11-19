@@ -1,7 +1,7 @@
 <template>
   <footer class="bg-yellow-900/75">
-    <section class="xl:container mx-auto flex justify-evenly items-center p-2">
-      <div class="xl:text-xl">
+    <section class="xl:container mx-auto flex justify-evenly items-center p-2 gap-5">
+      <div class="xl:text-xl hidden xl:block">
         <p>蘭丸串燒</p>
       </div>
 
