@@ -122,6 +122,16 @@ const rotateIcon = computed(() => {
   return openBuyItems.value ? true : false;
 });
 
+useHead({
+  title: `蘭丸燒烤 | 訂單完成`,
+  meta: [
+    {
+      name: "description",
+      content: "description",
+    },
+  ],
+});
+
 onBeforeMount(() => {
   Object.assign(buyerInfo, store.buyerInfo);
   Object.assign(buyItems, store.cart);

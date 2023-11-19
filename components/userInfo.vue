@@ -1,8 +1,8 @@
 <template>
-  <section class="my-5">
+  <section class="my-5 px-5">
     <VeeForm @submit="submit">
       <ul
-        class="w-[600px] h-[calc(100vh-65px-145px)] mx-auto bg-gray-100 border-2 border-yellow-800 py-5"
+        class="xl:w-[600px] xl:h-[calc(100vh-65px-145px)] mx-auto bg-gray-100 border-2 border-yellow-800 py-5"
         v-if="isLoggedIn"
       >
         <!-- 圖片 -->
@@ -264,6 +264,16 @@ const submit = (value) => {
     alert("舊密碼錯誤");
   }
 };
+
+useHead({
+  title: `蘭丸燒烤 | 會員中心`,
+  meta: [
+    {
+      name: "description",
+      content: "description",
+    },
+  ],
+});
 
 onMounted(() => {
   UserImg.value = store.data.userData.avatar;

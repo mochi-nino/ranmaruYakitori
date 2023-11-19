@@ -302,5 +302,16 @@ const submit = (value) => {
   }
 };
 
+useHead({
+  title: `蘭丸燒烤 | 付款`,
+  meta: [
+    {
+      name: "description",
+      content: "description",
+    },
+  ],
+});
+
+
 onBeforeMount(() => {});
 </script>

@@ -163,5 +163,15 @@ const upCartTotalPrice = () => {
   store.getCartTotalPrice(price);
 };
 
+useHead({
+  title: `蘭丸燒烤 | 購物車`,
+  meta: [
+    {
+      name: "description",
+      content: "description",
+    },
+  ],
+});
+
 onMounted(() => {});
 </script>

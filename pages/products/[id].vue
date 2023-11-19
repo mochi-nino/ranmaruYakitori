@@ -143,6 +143,16 @@ onBeforeMount(() => {
       if (data) {
         Object.assign(product, data);
         showMainImg.value = product.images[0];
+        useHead({
+          title: `蘭丸燒烤 | ${product.title}`,
+          meta: [
+            {
+              name: "description",
+              content: "description",
+            },
+          ],
+        });
+
       } else {
         notProduct.value = true;
       }
@@ -150,6 +160,6 @@ onBeforeMount(() => {
     .catch((error) => {
       console.log(error);
     });
-  // console.log(route.params.id);
+ 
 });
 </script>

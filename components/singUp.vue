@@ -140,4 +140,14 @@ const submit = (value) => {
       console.log("錯誤", error);
     });
 };
+
+useHead({
+  title: `蘭丸燒烤 | 註冊`,
+  meta: [
+    {
+      name: "description",
+      content: "description",
+    },
+  ],
+});
 </script>

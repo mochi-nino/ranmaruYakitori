@@ -77,6 +77,17 @@ const changImg = (changeIdx) => {
   }
 };
 
+
+useHead({
+  title: `蘭丸燒烤 | 首頁`,
+  meta: [
+    {
+      name: "description",
+      content: "description",
+    },
+  ],
+});
+
 // 動畫名稱用監聽
 watch(showImg, (newIdx, oldIdx) => {
   transitionName.value = newIdx > oldIdx ? "right-in" : "left-in";

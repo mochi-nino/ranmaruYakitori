@@ -3,18 +3,6 @@
 export default defineNuxtConfig({
   devtools: { enabled: false },
 
-  app: {
-    head: {
-      title: "蘭丸燒烤 | RANMARU",
-      meta: [{ name: "user", content: "會員中心" }],
-      link: {
-        rel: "icon",
-        type: "image/x-icon",
-        href: "logo.ico",
-      },
-    },
-  },
-
   postcss: {
     plugins: {
       tailwindcss: {},
@@ -45,5 +33,30 @@ export default defineNuxtConfig({
   app: {
     baseURL: process.env.NODE_ENV === "production" ? "/ranmaruYakitori/" : "/",
     buildAssetsDir: "/static/",
+    head: {
+      title: "蘭丸燒烤 | RANMARU",
+      meta: [
+        { name: "description", content: "蘭丸燒烤" },
+        // 網站描述
+        {
+          hid: "description",
+          name: "description",
+          content: "蘭丸燒烤 | RANMARU",
+        },
+        // 關鍵字
+        {
+          hid: "keywords",
+          name: "keywords",
+          content: "作品集",
+        },
+      ],
+      link: [
+        {
+          rel: "icon",
+          type: "image/x-icon",
+          href: "/logo.ico",
+        },
+      ],
+    },
   },
 });

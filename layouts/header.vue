@@ -134,11 +134,7 @@
           </li>
           <li class="border-b-2 p-5" v-if="isLoggedIn">
             <nuxt-link to="/user">
-              <img
-                :src="userData.avatar"
-                :alt="userData.name"
-                class="w-[50px] h-[50px] rounded-[50px] object-cover object-center"
-              />
+              <p class="text-white">會員中心</p>
             </nuxt-link>
           </li>
           <li class="border-b-2 p-5" v-if="isLoggedIn">
@@ -287,7 +283,6 @@ onMounted(() => {
   getFavouriteFromStorage();
   getCartData();
   emitLoading("loading", false);
-  console.log(router);
 });
 </script>
 

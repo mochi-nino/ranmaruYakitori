@@ -134,4 +134,14 @@ const submit = (value) => {
       console.log(error);
     });
 };
+
+useHead({
+  title: `蘭丸燒烤 | 會員登入`,
+  meta: [
+    {
+      name: "description",
+      content: "description",
+    },
+  ],
+});
 </script>

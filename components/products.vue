@@ -6,7 +6,12 @@
         :key="idx"
         class="relative w-full border-4 border-yellow-800"
       >
-        <nuxt-link :to="`/products/${item.id}`" :params="{ id: item.id }">
+        <nuxt-link
+          :to="{
+            name: `products-id`,
+            params: { id: item.id },
+          }"
+        >
           <span class="absolute top-0 left-0 bg-red-500 p-1">{{
             item.category.name
           }}</span>
@@ -55,6 +60,16 @@
 import { userStore } from "@/store/index";
 const store = userStore();
 import { onBeforeMount, reactive, ref, computed, watchEffect } from "vue";
+
+useHead({
+  title: `蘭丸燒烤 | 商品列表`,
+  meta: [
+    {
+      name: "description",
+      content: "description",
+    },
+  ],
+});
 
 //! ----------變數------------
 const products = reactive([]);
