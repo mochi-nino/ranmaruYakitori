@@ -19,7 +19,9 @@
 
       <!-- Nav -->
       <nav class="items-center xl:flex">
-        <ul class="flex text-xl font-medium xl:gap-12 xl:justify-between">
+        <ul
+          class="flex text-xl font-medium xl:gap-12 xl:justify-between items-center"
+        >
           <li class="hidden xl:block">
             <nuxt-link to="/products/">商店</nuxt-link>
           </li>

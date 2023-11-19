@@ -1,9 +1,9 @@
 <template>
   <section
-    class="xl:container xl:h-[calc(100vh-65px-106px)] m-auto py-10 xl:px-36 grid xl:grid-cols-2 items-center md:grid-cols-1 px-5 relative"
+    class="xl:container xl:h-[calc(100vh-65px-106px)] m-auto py-10 xl:px-30 grid xl:grid-cols-2 items-center md:grid-cols-1 px-5 relative"
     v-if="product.id"
   >
-    <nuxt-link to="/products/" class="xl:absolute xl:top-10 xl:left-36 mb-10">
+    <nuxt-link to="/products/" class="xl:absolute xl:top-10 xl:left-5 mb-10">
       <btn>返回商品頁</btn>
     </nuxt-link>
     <!-- 圖片區 -->
