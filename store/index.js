@@ -18,6 +18,9 @@ export const userStore = defineStore("main", () => {
 
   const buyerInfo = ref("");
 
+  // 後台PW
+  const backUser = ref(null);
+
   //? getters(計算)computed
 
   //* 判斷是否有登入
@@ -104,6 +107,22 @@ export const userStore = defineStore("main", () => {
     buyerInfo.value = data;
   };
 
+  //* 後台登入
+  const backUserLogin = (value) => {
+    backUser.value = value;
+  };
+
+  //* get後台資料
+  const getBackUser = (value) => {
+    const sessionStorageData = JSON.parse(
+      sessionStorage.getItem("backUserData")
+    );
+
+    if (sessionStorageData) {
+      sessionStorage.setItem("backUserData", JSON.stringify(value));
+    }
+  };
+
   return {
     data,
     loading,
@@ -126,5 +145,8 @@ export const userStore = defineStore("main", () => {
     cartTotalPrice,
     openFavouriteBox,
     openHB,
+    backUser,
+    backUserLogin,
+    getBackUser,
   };
 });

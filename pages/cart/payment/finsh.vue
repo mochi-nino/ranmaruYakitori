@@ -39,7 +39,7 @@
         </li>
       </ul>
       <div class="text-center bg-gray-200 pb-10">
-        <nuxt-link to="/">
+        <nuxt-link to="/home">
           <btn>返回首頁</btn>
         </nuxt-link>
       </div>

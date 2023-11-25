@@ -10,7 +10,11 @@
     <div class="xl:w-[500px]">
       <!-- 大圖 -->
       <div class="">
-        <img :src="showMainImg" :alt="'圖片：' + showMainImg" />
+        <img
+          :src="showMainImg"
+          :alt="'圖片：' + showMainImg"
+          class="w-[500px] h-[500px]"
+        />
       </div>
       <!-- 小圖 -->
       <div class="flex justify-evenly items-center m-10">
@@ -152,7 +156,6 @@ onBeforeMount(() => {
             },
           ],
         });
-
       } else {
         notProduct.value = true;
       }
@@ -160,6 +163,5 @@ onBeforeMount(() => {
     .catch((error) => {
       console.log(error);
     });
- 
 });
 </script>

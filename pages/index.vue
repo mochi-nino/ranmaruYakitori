@@ -1,85 +1,50 @@
 <template>
-  <section class="flex overflow-hidden h-[500px] relative">
-    <TransitionGroup :name="transitionName">
-      <transition v-for="(img, idx) in slideImg" :key="img.index">
-        <div class="absolute w-full h-full" v-show="showImg === idx">
-          <img
-            :src="getImageUrl(img.img)"
-            :alt="'Image ' + img.index"
-            class="w-full h-full object-cover object-center"
-          />
-        </div>
-      </transition>
-    </TransitionGroup>
+  <div class="relative h-[100vh]" v-show="animation">
+    <img
+      src="../assets/images/biru.png"
+      alt="Beer"
+      class="beer1 scale-x-[-1] absolute left-0 top-0 bottom-0 m-auto opacity-0"
+    />
+    <img
+      src="../assets/images/biru.png"
+      alt="Beer"
+      class="beer2 absolute right-0 top-0 bottom-0 m-auto opacity-0"
+    />
+    <img
+      src="../assets/images/star.png"
+      alt="star"
+      class="star w-[300px] absolute top-48 right-0 left-0 m-auto opacity-0"
+    />
+  </div>
 
-    <span
-      class="absolute text-4xl right-5 inset-y-0 h-10 m-auto animate-toRight cursor-pointer"
-      @click="changImg(1)"
-      >➤</span
-    >
-    <span
-      class="absolute text-4xl rotate-180 left-5 inset-y-0 h-10 m-auto animate-toLeft cursor-pointer"
-      @click="changImg(-1)"
-      >➤</span
-    >
-
-    <span
-      class="text-4xl h-96 absolute [writing-mode:vertical-rl] font-bold tracking-wider inset-y-0 m-auto bg-gray-700/50 right-10 xl:right-96"
-      >喝酒、聊天，新選擇。<br />蘭丸串燒。</span
-    >
+  <section v-show="!animation">
+    <div class="w-[300px] mx-auto my-32 bg-white rounded-[50%]">
+      <img src="../public/logo.png" alt="logo" />
+    </div>
+    <div class="flex justify-center items-center gap-48">
+      <div
+        class="w-[300px] h-[300px] bg-yellow-900/80 rounded-[50%] text-center leading-[300px] text-4xl front"
+      >
+        <nuxt-link to="/home">前台</nuxt-link>
+      </div>
+      <div
+        class="w-[300px] h-[300px] bg-yellow-900/80 rounded-[50%] text-center leading-[300px] text-4xl back"
+      >
+        <nuxt-link to="/back">後台</nuxt-link>
+      </div>
+    </div>
   </section>
-
-  <about></about>
 </template>
 
 <script setup>
-import { ref, reactive, watch } from "vue";
-import about from "@/components/about.vue";
+import { onMounted, ref } from "vue";
 
-components: {
-  about;
-}
-
-const getImageUrl = (name) => {
-  const assets = import.meta.glob("~/assets/images/*", {
-    eager: true,
-    import: "default",
-  });
-
-  return assets[`/assets/images/${name}`];
-};
-
-// 輪播圖陣列
-const slideImg = reactive([
-  { index: 1, img: "01.jpg" },
-  { index: 2, img: "02.jpg" },
-  { index: 3, img: "03.jpg" },
-]);
-
-// 輪播圖Idx
-const showImg = ref(0);
-
-// 跑動畫名稱的變數
-const transitionName = ref("right-in");
-
-// 換圖片按鈕
-const changImg = (changeIdx) => {
-  switch (true) {
-    case changeIdx === 1 && showImg.value === slideImg.length - 1: //? 如果按右邊的按鈕已經到最後一張的時候則直接回第一張
-      showImg.value = 0;
-      break;
-    case changeIdx === -1 && showImg.value === 0: //? 如果按左邊的按鈕目前是第一張的話則帶到最後一張
-      showImg.value = slideImg.length - 1;
-      break;
-    default:
-      showImg.value = showImg.value + changeIdx; //? 都不是則看changeIdx是整數還負數來決定上下張
-      break;
-  }
-};
-
+definePageMeta({
+  closeLayouts: true,
+});
 
 useHead({
-  title: `蘭丸燒烤 | 首頁`,
+  title: "蘭丸燒烤",
   meta: [
     {
       name: "description",
@@ -88,38 +53,75 @@ useHead({
   ],
 });
 
-// 動畫名稱用監聽
-watch(showImg, (newIdx, oldIdx) => {
-  transitionName.value = newIdx > oldIdx ? "right-in" : "left-in";
+const animation = ref(true);
+
+onMounted(() => {
+  setTimeout(() => {
+    animation.value = false;
+  }, 2000);
 });
 </script>
 
-<style lang="scss" scoped>
-@keyframes rightIn {
+<style scoped lang="scss">
+.front,
+.back {
+  &:hover {
+    background-image: url("/assets/images/bg-izakaya.jpg");
+    background-size: cover;
+    background-position: center;
+    a {
+      background-color: black;
+      padding: 10px;
+      border-radius: 20px;
+    }
+  }
+}
+
+.beer1 {
+  animation: beer1 1s linear 0s;
+  animation-fill-mode: backwards;
+}
+
+.beer2 {
+  animation: beer2 1s linear 0s;
+}
+
+.star {
+  animation: star 1s 0.9s;
+}
+
+@keyframes beer1 {
   from {
-    left: 100%;
+    left: 0px;
+    opacity: 1;
   }
   to {
-    left: 0%;
+    left: 30%;
+    rotate: 8deg;
+    opacity: 1;
   }
 }
 
-@keyframes leftIn {
+@keyframes beer2 {
   from {
-    right: 100%;
+    right: 0px;
+    opacity: 1;
   }
   to {
-    right: 0%;
+    right: 30%;
+    rotate: -8deg;
+    opacity: 1;
   }
 }
 
-.right-in-enter-active,
-.right-in-leave-active {
-  animation: rightIn 0.5s;
-}
-
-.left-in-enter-active,
-.left-in-leave-active {
-  animation: leftIn 0.5s;
+@keyframes star {
+  from {
+    opacity: 1;
+    scale: (0);
+  }
+  to {
+    opacity: 1;
+    scale: (1);
+  }
 }
 </style>

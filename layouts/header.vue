@@ -3,7 +3,7 @@
     <section class="flex justify-between xl:container mx-auto text-white">
       <!-- logo -->
       <div class="logo py-2">
-        <nuxt-link to="/" class="text-4xl font-black flex gap-4 items-center">
+        <nuxt-link to="/home" class="text-4xl font-black flex gap-4 items-center">
           <img
             src="@/public/logo.png"
             alt="logo"
@@ -165,7 +165,7 @@
 import { userStore } from "@/store/index";
 const store = userStore();
 
-//? 路由器
+//? 路由
 import { useRouter } from "vue-router";
 const router = useRouter();
 

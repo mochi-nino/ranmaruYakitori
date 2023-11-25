@@ -67,7 +67,7 @@
 import { userStore } from "@/store/index";
 const store = userStore();
 
-//? 路由器
+//? 路由
 import { useRouter } from "vue-router";
 const router = useRouter();
 
@@ -125,7 +125,7 @@ const submit = (value) => {
         }
         store.login(userData);
         alert("登入成功");
-        router.push("/");
+        router.push("/home");
       } else {
         alert("信箱或密碼錯誤，請重新輸入");
       }
