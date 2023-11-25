@@ -29,7 +29,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     }
   }
 
-  if (to.path === "/back") {
+  if (to.path === "/back" && process.client) {
     const backUserData = sessionStorage.getItem("backUserData");
     if (backUserData) {
       return navigateTo("/back/productMg");
