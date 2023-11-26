@@ -26,7 +26,7 @@
       <!-- 清單 -->
       <ul>
         <li
-          class="grid grid-cols-[100px,250px,1fr,200px,1fr,150px] items-center justify-center text-center border-y-2 border-black p-2 mb-2"
+          class="grid grid-cols-[100px,250px,1fr,200px,1fr,150px,15px] items-center justify-center text-center border-y-2 border-black p-2 mb-2"
         >
           <p v-for="(title, idx) in title" :key="idx">{{ title }}</p>
         </li>
@@ -279,6 +279,8 @@ definePageMeta({
   closeLayouts: true,
 });
 
+//* 資料
+
 const title = reactive([
   "商品編號",
   "商品圖片",
@@ -286,16 +288,13 @@ const title = reactive([
   "商品價格",
   "商品描述",
   "",
+  "",
 ]);
 const products = reactive([]);
-
-const addProductMode = ref(false);
 
 const categorys = reactive({ data: [] });
 
 const search = ref("");
-
-const addNewImg = ref(false);
 
 const groupsImgIdx = ref(0);
 
@@ -303,8 +302,16 @@ const editingImgIdx = ref(0);
 
 const editImgIdx = reactive({ id: "", idx: 0, newImg: [null, null, null] });
 
+const addProductMode = ref(false);
+
+const addNewImg = ref(false);
+
 const openChangImgBox = ref(false);
 
+const editIdx = ref("");
+
+
+//* 搜尋
 const productList = computed(() => {
   if (search.value === "") {
     return products;
@@ -316,7 +323,16 @@ const productList = computed(() => {
   }
 });
 
-const editIdx = ref("");
+//* 更換圖片
+const changeProductImg = (idx) => {
+  editingImgIdx.value = idx;
+  openChangImgBox.value = !openChangImgBox.value;
+};
+
+//* 換下一張圖片
+const changeProductImgIdx = (idx) => {
+  editingImgIdx.value = idx;
+};
 
 const showImgIdx = computed(() => (id, ImgIdx) => {
   if (editIdx.value === id) {
@@ -326,15 +342,7 @@ const showImgIdx = computed(() => (id, ImgIdx) => {
   }
 });
 
-const changeProductImg = (idx) => {
-  editingImgIdx.value = idx;
-  openChangImgBox.value = !openChangImgBox.value;
-};
-
-const changeProductImgIdx = (idx) => {
-  editingImgIdx.value = idx;
-};
-
+//* 開啟可修改條件
 const allowEdit = (allow, id) => {
   if (!allow) {
     editIdx.value = id;
@@ -346,6 +354,9 @@ const allowEdit = (allow, id) => {
   }
 };
 
+
+//* Class控制/文字顯示
+
 const editingGackGroundColor = computed(() => (id) => {
   return editIdx.value === id ? "bg-yellow-700/30" : null;
 });
@@ -354,6 +365,16 @@ const editingProductImg = computed(() => (id) => {
   return editIdx.value === id ? "productsImg" : null;
 });
 
+const SelectButtonText = computed(() => (type) => {
+  if (!addProductMode.value) {
+    return type ? "確定" : "刪除";
+  } else {
+    return type ? "新增" : "取消";
+  }
+});
+
+
+//* 新增新欄位
 const appendNewProduct = async () => {
   products.push({
     id: products[products.length - 1].id + 1,
@@ -372,13 +393,50 @@ const appendNewProduct = async () => {
   });
 };
 
-const SelectButtonText = computed(() => (type) => {
-  if (!addProductMode.value) {
-    return type ? "確定" : "刪除";
-  } else {
-    return type ? "新增" : "取消";
-  }
-});
+
+//* 新增/修改/刪除 API
+
+const createProduct = async (value) => {
+  await fetch(`https://api.escuelajs.co/api/v1/products/`, {
+    method: "POST",
+    body: JSON.stringify(value),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((result) => {
+      alert("新增成功");
+      getProducts();
+      editIdx.value = "";
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  addProductMode.value = false;
+};
+
+const updateProduct = async (value) => {
+  await fetch(`https://api.escuelajs.co/api/v1/products/${value.id}`, {
+    method: "PUT",
+    body: JSON.stringify(value),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((result) => {
+      alert("修改成功");
+      getProducts();
+      editIdx.value = "";
+      openChangImgBox.value = false;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  addNewImg.value = false;
+};
+
 
 const deleteProduct = (id) => {
   if (!addProductMode.value) {
@@ -404,56 +462,6 @@ const deleteProduct = (id) => {
   }
 };
 
-const updateProduct = async (value) => {
-  await fetch(`https://api.escuelajs.co/api/v1/products/${value.id}`, {
-    method: "PUT",
-    body: JSON.stringify(value),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((res) => res.json())
-    .then((result) => {
-      alert("修改成功");
-      getProducts();
-      editIdx.value = "";
-      openChangImgBox.value = false;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  addNewImg.value = false;
-};
-
-const createProduct = async (value) => {
-  await fetch(`https://api.escuelajs.co/api/v1/products/`, {
-    method: "POST",
-    body: JSON.stringify(value),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((res) => res.json())
-    .then((result) => {
-      alert("新增成功");
-      getProducts();
-      editIdx.value = "";
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  addProductMode.value = false;
-};
-
-const submit = (value) => {
-  console.log(value);
-  if (addProductMode.value) {
-    createProduct(value);
-  } else {
-    updateProduct(value);
-  }
-};
-
 const getProducts = () => {
   fetch("https://api.escuelajs.co/api/v1/products")
     .then((res) => res.json())
@@ -475,9 +483,19 @@ const getProducts = () => {
     });
 };
 
+
+const submit = (value) => {
+  console.log(value);
+  if (addProductMode.value) {
+    createProduct(value);
+  } else {
+    updateProduct(value);
+  }
+};
+
+
 onBeforeMount(() => {
   getProducts();
-  console.log(products);
 });
 </script>
 

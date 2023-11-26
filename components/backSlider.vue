@@ -25,7 +25,7 @@ const route = useRoute();
 
 const pages = reactive([
   { title: "商品管理", routeName: "productMg" },
-  { title: "會員管理", routeName: "" },
+  { title: "會員管理", routeName: "userInfoMg" },
 ]);
 
 const inBackColor = computed(() => (pageName) => {
