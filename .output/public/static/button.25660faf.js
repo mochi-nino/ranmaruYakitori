@@ -1,1 +1,0 @@
-import{_ as o,o as t,c as s,K as c,d as n}from"./entry.bd2cdfd2.js";const r={},l={type:"submit",class:"bg-yellow-900 text-center w-[120px] h-[40px] rounded-[10px] hover:bg-yellow-700 focus:bg-yellow-800 focus:outline-"};function a(e,_){return t(),s("button",l,[c(e.$slots,"default",{},()=>[n("登入")])])}const u=o(r,[["render",a]]);export{u as b};

@@ -1,9 +1,9 @@
 <template>
   <section class="xl:w-[1280px] m-auto py-10">
     <!-- 購物車 -->
-    <div class="w-[90%] mx-auto">
+    <div class="w-full mx-auto">
       <h2 class="text-3xl text-center bg-yellow-900/75 py-3">購物車</h2>
-      <ul class="bg-white">
+      <ul class="bg-white pb-5">
         <!-- 標題 -->
         <li
           class="grid grid-cols-6 justify-between items-center py-5 px-2 text-center font-bold text-lg"
@@ -30,24 +30,33 @@
               class="w-full h-full object-cover object-center"
             />
           </div>
+
+          <!-- 標題 -->
+          <h3 class="text-black text-center break-words">{{ item.title }}</h3>
+
           <!-- 單價 -->
-          <h3 class="text-black text-center">{{ item.title }}</h3>
           <div class="text-center">
             <p>${{ item.price }}</p>
           </div>
           <!-- 數量 -->
           <div class="flex justify-center items-center gap-1 xl:gap-5">
-            <btn
-              class="w-[30px] h-[20px] xl:text-2xl xl:w-[35px]"
-              @click="editCount(0, item, item.count)"
-              >－</btn
+            <div
+              class="bg-yellow-900 flex justify-center items-center gap-2 rounded-xl xl:gap-5"
             >
-            <p>{{ item.count }}</p>
-            <btn
-              class="w-[30px] h-[20px] xl:text-2xl xl:w-[35px]"
-              @click="editCount(1, item, item.count)"
-              >＋</btn
-            >
+              <button
+                class="w-full h-[50%] text-s xl:text-2xl xl:w-[35px] hover:bg-yellow-700 rounded-xl"
+                @click="editCount(0, item, item.count)"
+              >
+                －
+              </button>
+              <p class="text-white text-s">{{ item.count }}</p>
+              <button
+                class="w-full h-[50%] text-s xl:text-2xl xl:w-[35px] hover:bg-yellow-700 rounded-xl"
+                @click="editCount(1, item, item.count)"
+              >
+                ＋
+              </button>
+            </div>
           </div>
           <!-- 總價 -->
           <div class="text-center">

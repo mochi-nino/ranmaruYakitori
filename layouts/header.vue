@@ -3,7 +3,10 @@
     <section class="flex justify-between xl:container mx-auto text-white">
       <!-- logo -->
       <div class="logo py-2">
-        <nuxt-link to="/home" class="text-4xl font-black flex gap-4 items-center">
+        <nuxt-link
+          to="/home"
+          class="text-4xl font-black flex gap-4 items-center"
+        >
           <img
             src="@/public/logo.png"
             alt="logo"
@@ -18,7 +21,7 @@
       </div>
 
       <!-- Nav -->
-      <nav class="items-center xl:flex">
+      <nav class="items-center xl:flex xl:px-10">
         <ul
           class="flex text-xl font-medium xl:gap-12 xl:justify-between items-center"
         >

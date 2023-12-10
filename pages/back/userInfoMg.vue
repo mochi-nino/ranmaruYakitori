@@ -5,7 +5,7 @@
       <h1 class="bg-yellow-900 py-3 text-center text-3xl">會員管理</h1>
       <ul>
         <li
-          class="grid grid-cols-[100px,1fr,1fr,1fr,150px,15px] items-center justify-center text-center border-y-2 border-black p-2 mb-2"
+          class="grid grid-cols-[100px,1fr,1fr,1fr,150px] items-center justify-center text-center border-y-2 border-black p-2 mb-2"
         >
           <p v-for="(title, tableTitleIdx) in title" :key="tableTitleIdx">
             {{ title }}
@@ -24,7 +24,7 @@
                   <div class="relative">
                     <p
                       v-if="user.id === 1 || user.id === 2 || user.id === 3"
-                      class="text-red-600  cursor-help absolute -top-3 -left-2"
+                      class="text-red-600 cursor-help absolute -top-3 -left-2"
                       @mouseover="redStarTips(userIdx, user.id)"
                       @mouseout="redStarTipsBox = false"
                     >

@@ -1,5 +1,7 @@
 <template>
-  <section class="flex items-center gap-24 h-[100vh] w-[90%] m-auto">
+  <section
+    class="flex items-center justify-between gap-12 h-[100vh] px-10 m-auto"
+  >
     <backSlider></backSlider>
     <div class="text-xl bg-slate-100 w-full relative">
       <h1 class="bg-yellow-900 py-3 text-center text-3xl">商品管理</h1>
@@ -26,7 +28,7 @@
       <!-- 清單 -->
       <ul>
         <li
-          class="grid grid-cols-[100px,250px,1fr,200px,1fr,150px,15px] items-center justify-center text-center border-y-2 border-black p-2 mb-2"
+          class="grid grid-cols-[60px,250px,1fr,150px,1fr,100px] items-center justify-center text-center border-y-2 border-black p-2 mb-2"
         >
           <p v-for="(title, idx) in title" :key="idx">{{ title }}</p>
         </li>
@@ -37,16 +39,16 @@
           <div v-for="(item, idx) in productList" :key="idx">
             <VeeForm @submit="submit">
               <div
-                class="mb-2 grid grid-cols-[100px,250px,1fr,200px,1fr,150px] items-center justify-center text-center px-2 text-lg"
+                class="mb-2 grid grid-cols-[60px,250px,1fr,150px,1fr,100px] items-center justify-center text-center px-2 text-lg mb-6"
                 :class="editingGackGroundColor(item.id)"
               >
                 <!-- ID -->
+                <p>{{ item.id }}</p>
                 <VeeField
                   type="text"
                   name="id"
                   :placeholder="item.id"
-                  class="block mb-2 px-2 py-[2px] text-center"
-                  disabled="true"
+                  class="hidden"
                   v-model="item.id"
                 >
                 </VeeField>
@@ -194,7 +196,7 @@
                     type="text"
                     name="title"
                     :placeholder="item.title"
-                    class="block px-2 py-[2px] text-center w-full"
+                    class="block px-2 py-[2px] text-center w-[90%]"
                     :disabled="editIdx === item.id ? false : true"
                     v-model="item.title"
                   >
@@ -216,7 +218,7 @@
                 </div>
 
                 <!-- 敘述 -->
-                <div>
+                <div class="flex items-center">
                   <VeeField
                     as="textarea"
                     name="description"
@@ -282,7 +284,7 @@ definePageMeta({
 //* 資料
 
 const title = reactive([
-  "商品編號",
+  "編號",
   "商品圖片",
   "商品分類/名稱",
   "商品價格",
@@ -309,7 +311,6 @@ const addNewImg = ref(false);
 const openChangImgBox = ref(false);
 
 const editIdx = ref("");
-
 
 //* 搜尋
 const productList = computed(() => {
@@ -354,7 +355,6 @@ const allowEdit = (allow, id) => {
   }
 };
 
-
 //* Class控制/文字顯示
 
 const editingGackGroundColor = computed(() => (id) => {
@@ -372,7 +372,6 @@ const SelectButtonText = computed(() => (type) => {
     return type ? "新增" : "取消";
   }
 });
-
 
 //* 新增新欄位
 const appendNewProduct = async () => {
@@ -392,7 +391,6 @@ const appendNewProduct = async () => {
     scrollArea.scrollTo(0, scrollArea.scrollHeight);
   });
 };
-
 
 //* 新增/修改/刪除 API
 
@@ -436,7 +434,6 @@ const updateProduct = async (value) => {
     });
   addNewImg.value = false;
 };
-
 
 const deleteProduct = (id) => {
   if (!addProductMode.value) {
@@ -483,7 +480,6 @@ const getProducts = () => {
     });
 };
 
-
 const submit = (value) => {
   console.log(value);
   if (addProductMode.value) {
@@ -492,7 +488,6 @@ const submit = (value) => {
     updateProduct(value);
   }
 };
-
 
 onBeforeMount(() => {
   getProducts();

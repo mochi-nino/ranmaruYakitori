@@ -3,17 +3,17 @@
     class="xl:container xl:h-[calc(100vh-65px-106px)] m-auto py-10 xl:px-30 grid xl:grid-cols-2 items-center md:grid-cols-1 px-5 relative"
     v-if="product.id"
   >
-    <nuxt-link to="/products/" class="xl:absolute xl:top-10 xl:left-5 mb-10">
-      <btn>返回商品頁</btn>
-    </nuxt-link>
     <!-- 圖片區 -->
-    <div class="xl:w-[500px]">
+    <div class="xl:w-[500px] relative">
+      <nuxt-link to="/products/" class="xl:absolute xl:-top-14">
+        <btn>返回商品頁</btn>
+      </nuxt-link>
       <!-- 大圖 -->
       <div class="">
         <img
           :src="showMainImg"
           :alt="'圖片：' + showMainImg"
-          class="w-[500px] h-[500px]"
+          class="w-[500px] xl:h-[500px] xl:object-cover"
         />
       </div>
       <!-- 小圖 -->

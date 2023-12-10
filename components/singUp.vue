@@ -1,6 +1,6 @@
 <template>
-  <section class="xl:h-[calc(100vh-65px-106px)] flex items-center p-5">
-    <div class="xl:w-1/3 md:container m-auto w-full">
+  <section class="xl:h-[calc(100vh-65px-106px)] flex items-center xl:p-5 py-5">
+    <div class="xl:w-[50%] md:container m-auto w-full">
       <h1 class="text-4xl text-center bg-yellow-900/75 py-3">會員註冊</h1>
       <!-- 輸入區塊 -->
       <VeeForm @submit="submit">

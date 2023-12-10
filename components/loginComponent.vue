@@ -1,11 +1,11 @@
 <template>
   <section class="h-[calc(100vh-65px-106px)] flex items-center">
-    <div class="xl:w-1/3 md:container m-auto w-full px-5">
+    <div class="xl:w-1/3 md:container m-auto w-full">
       <h1 class="text-4xl text-center bg-yellow-900/75 py-3">會員登入</h1>
       <!-- 輸入區塊 -->
       <VeeForm @submit="submit" :validation-schema="schema">
         <div
-          class="bg-gray-200 flex justify-center items-center flex-col gap-10 p-10"
+          class="bg-gray-200 flex justify-center items-center flex-col gap-10 py-12"
         >
           <!-- email -->
           <div>
@@ -19,7 +19,7 @@
               label="E-mail"
               class="w-[350px] h-[45px] px-2 py-4 text-black border border-gray-400/50"
             />
-            <VeeErrorMessage name="email" class="text-red-500 block px-6" />
+            <VeeErrorMessage name="email" class="text-red-500 block ml-6" />
           </div>
           <!-- 密碼 -->
           <div>
@@ -34,7 +34,7 @@
               maxLength="16"
               class="w-[350px] h-[45px] px-2 py-4 text-black border border-gray-400/50"
             />
-            <VeeErrorMessage name="password" class="text-red-500 block px-6" />
+            <VeeErrorMessage name="password" class="text-red-500 block ml-6" />
           </div>
           <!-- 記住我 -->
           <div class="text-center">
